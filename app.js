@@ -14,13 +14,13 @@ app.use(express.static("public"));
 mongoose.set('strictQuery', true);
 mongoose.connect("mongodb://127.0.0.1/userDB");
 
-const userSchema={
+const userSchema=new mongoose.Schema({
     email:String,
     password:String
-};
+});
 
-// const secret="Thisisourlittlesecret";
-// userSchema.plugin(encrypt,{secret:secret,encryptedFields:['password']});
+const secret="Thisisourlittlesecret";
+userSchema.plugin(encrypt,{secret:secret,encryptedFields:['password']});
 
 const User=new mongoose.model("User",userSchema);
 
